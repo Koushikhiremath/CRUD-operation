@@ -1,8 +1,9 @@
 <h1 class="text-center">CRUD OPERATIONS USING ANGULAR</h1>
 <div class="text-center mt-5">
 <button type="button" class="btn btn-outline-primary" (click)="getAllEmployees()">Fetch All Employees</button>
+<button type="button" class="btn btn-outline-success ml-5" (click)="createemployee()">Create employee</button>
 </div>
-<div class="mt-5">
+<div *ngIf="disp" class="mt-5">
     <table class="table">
         <thead>
           <tr>
@@ -10,6 +11,8 @@
             <th scope="col">Name</th>
             <th scope="col">Salary</th>
             <th scope="col">age</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -17,9 +20,34 @@
             <th scope="row">{{employee.id}}</th>
             <td>{{employee.employee_name}}</td>
             <td>{{employee.employee_salary}}</td>
-            <td>{{employee.employee_age}}</td>
+            <td>{{employee.employee_age}} </td>
+            <td><button type="button" class="btn btn-primary">Edit</button></td>
+            <td><button type="button" class="btn btn-danger">Delete</button></td>
+         
           </tr>
           
         </tbody>
       </table>
+</div>
+
+<div *ngIf="create"  class="container mx-auto mt-5 text-center" style="width: 400px;" >
+  <form  >
+    <div class="form-group">
+      <label for="employeeid">Employee ID</label>
+      <input type="number" class="form-control" id="employeeID" #employeeid >
+    </div>
+    <div>
+      <label for="employeename">Employee Name</label>
+      <input type="text" class="form-control text-center" id="employeename" placeholder="Enter the Employee Name" #employeename>
+    </div>
+    <div class="form-group">
+      <label for="employeesalary">Employee Salary</label>
+      <input type="number" class="form-control" id="employeesalary" #employeesalary>
+    </div>
+    <div class="form-group">
+      <label for="employeeage">Employee Age</label>
+      <input type="number" class="form-control" id="employeeage" #employeeage>
+    </div>
+    <button class="btn btn-success" type="submit" (click)="sumbitemployee(employeeid.value,employeename.value,employeesalary.value,employeeage.value)">Submit</button>
+  </form>
 </div>

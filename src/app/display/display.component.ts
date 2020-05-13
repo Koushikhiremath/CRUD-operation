@@ -9,21 +9,39 @@ import { convertActionBinding } from '@angular/compiler/src/compiler_util/expres
 })
 export class DisplayComponent implements OnInit {
 
+  public disp:boolean=false;
+
+  public create:boolean=false;
+
+  public edit:boolean=false;
+
+
+
   public employees=[{
 
   }];
 
+  public employee={
+    employeeid:"",
+    employeename:"",
+    employeesalary:"",
+    employeeage:""
+
+  }
+
+  
+
   constructor(private res:DataService) { }
 
   ngOnInit(): void {
-
-     
-    
     
   }
 
   getAllEmployees()
   {
+    this.create=false;
+    this.edit=false;
+    this.disp=true;
 
     this.res.getEmployee().then((response)=>
     {
@@ -34,12 +52,30 @@ export class DisplayComponent implements OnInit {
       })
     })
     
-    
-    
-    
   }
     
+  createemployee()
+  {
+    this.disp=false;
+    this.edit=false;
+    this.create=true;
+    
+  }
 
-  
+  sumbitemployee(...value)
+  {
+   this.employee.employeeid=value[0];
+   this.employee.employeename=value[1];
+   this.employee.employeesalary=value[2];
+   this.employee.employeeage=value[3];
+
+   console.log(this.employee);
+
+   this.res.createemployee(this.employee);
+   this.create=false;
+  }
+
+
+ 
 
 }
