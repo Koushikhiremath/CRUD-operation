@@ -7,10 +7,10 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">id</th>
+            <th scope="col">ID</th>
             <th scope="col">Name</th>
             <th scope="col">Salary</th>
-            <th scope="col">age</th>
+            <th scope="col">Age</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
           </tr>
@@ -21,8 +21,8 @@
             <td>{{employee.employee_name}}</td>
             <td>{{employee.employee_salary}}</td>
             <td>{{employee.employee_age}} </td>
-            <td><button type="button" class="btn btn-primary">Edit</button></td>
-            <td><button type="button" class="btn btn-danger">Delete</button></td>
+            <td><button type="button" class="btn btn-primary" (click)="editemployee(employee)">Edit</button></td>
+            <td><button type="button" class="btn btn-danger"(click)="deleteemployee(employee)">Delete</button></td>
          
           </tr>
           
@@ -34,7 +34,7 @@
   <form  >
     <div class="form-group">
       <label for="employeeid">Employee ID</label>
-      <input type="number" class="form-control" id="employeeID" #employeeid >
+      <input type="number" class="form-control text-center" id="employeeID" #employeeid >
     </div>
     <div>
       <label for="employeename">Employee Name</label>
@@ -42,12 +42,34 @@
     </div>
     <div class="form-group">
       <label for="employeesalary">Employee Salary</label>
-      <input type="number" class="form-control" id="employeesalary" #employeesalary>
+      <input type="number" class="form-control text-center" id="employeesalary" #employeesalary>
     </div>
     <div class="form-group">
       <label for="employeeage">Employee Age</label>
-      <input type="number" class="form-control" id="employeeage" #employeeage>
+      <input type="number" class="form-control text-center" id="employeeage" #employeeage>
     </div>
     <button class="btn btn-success" type="submit" (click)="sumbitemployee(employeeid.value,employeename.value,employeesalary.value,employeeage.value)">Submit</button>
+  </form>
+</div>
+
+<div *ngIf="edit"  class="container mx-auto mt-5 text-center" style="width: 400px;" >
+  <form lass="" [formGroup]="profileForm" (ngSubmit)="updateemployee(profileForm.value)" >
+    <div class="form-group " >
+      <label for="employeeid">Employee ID</label>
+      <input type="number" class="form-control text-center" formControlName="employeeid" required>
+    </div>
+    <div>
+      <label for="employeename">Employee Name</label>
+      <input type="text" class="form-control text-center " formControlName="employeename" required>
+    </div>
+    <div class="form-group">
+      <label for="employeesalary">Employee Salary</label>
+      <input type="number" class="form-control text-center" formControlName="employeesalary" required>
+    </div>
+    <div class="form-group">
+      <label for="employeeage">Employee Age</label>
+      <input type="number" class="form-control text-center" formControlName="employeeage" required>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="!profileForm.valid">Update</button>
   </form>
 </div>
